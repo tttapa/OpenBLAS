@@ -13,10 +13,10 @@
 #include <common.h>
 extern "C" void BLASFUNC(dgemmt)(const char *, const char *, const char *,
                                  const blasint *, const blasint *,
+                                 const double *, const double *,
                                  const blasint *, const double *,
-                                 const double *, const blasint *,
-                                 const double *, const blasint *,
-                                 const double *, double *, const blasint *);
+                                 const blasint *, const double *, double *,
+                                 const blasint *);
 namespace blas {
 void dgemm(const char *transA, const char *transB, const blasint *m,
            const blasint *n, const blasint *k, const double *alpha,
@@ -36,8 +36,8 @@ void dgemmt(const char *uplo, const char *transA, const char *transB,
             const double *A, const blasint *ldA, const double *B,
             const blasint *ldB, const double *beta, double *C,
             const blasint *ldC) {
-    ::BLASFUNC(dgemmt)(uplo, transA, transB, n, n, k, alpha, A, ldA, B, ldB,
-                       beta, C, ldC);
+    ::BLASFUNC(dgemmt)(uplo, transA, transB, n, k, alpha, A, ldA, B, ldB, beta,
+                       C, ldC);
 }
 } // namespace blas
 #else
